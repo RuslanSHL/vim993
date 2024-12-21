@@ -48,8 +48,10 @@ nnoremap <C-Right> :tabnext<CR>
 nnoremap <silent> <C-Down> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 nnoremap <silent> <C-Up> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 " копирование/вставка в глобальный буфер
-noremap <M-y> "+y<Enter>
+noremap <M-y> "+y<CR>
 noremap <M-p> "+p
+" закрыть все окна кроме текущего
+noremap <M-q> :only<CR>
 
 " настройка строки статуса
 hi status_line_color cterm=reverse ctermbg=233 ctermfg=245 term=reverse 
@@ -89,6 +91,7 @@ else
 	call plug#begin('~/.vim/plugged')
 endif
 	Plug 'preservim/nerdtree'
+	Plug 'vim-autoformat/vim-autoformat'
 call plug#end()
 
 "NERDTree config
@@ -96,6 +99,8 @@ let g:NERDTreeDirArrowExpandable = '>'
 let g:NERDTreeDirArrowCollapsible = 'v'
 noremap <M-t> :NERDTree<Enter>
 
+"NERDTree congig
+autocmd FileType python map <buffer> <M-c> :call flake8#Flake8()<CR>
 "python
 set pyx=3
 let python_highlight_all = 1
